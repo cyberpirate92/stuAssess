@@ -10,7 +10,7 @@
 			$upload_dir = "faculty_uploads/";
 
 			// generating name in following format : facultyID_courseCode_courseSlot
-			$newFileName = getNameFromSpreadSheet($_FILES["classInfo"]["tmp_name"]);
+			$newFileName = getNameFromSpreadSheet($_FILES["classInfo"]["tmp_name"],$_SESSION['username']);
 			if($newFileName != null)
 			{
 				$newFileName = $newFileName.".xls";
@@ -18,6 +18,7 @@
 				if (move_uploaded_file($_FILES["classInfo"]["tmp_name"], $target_file))
 				{
 	        		displayJSAlert($_FILES["classInfo"]["name"]." is uploaded succesfully.");
+	        		storeInDB($target_file);
 				}
 	    		else
 	    		{ 
