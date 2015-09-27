@@ -69,7 +69,7 @@ a.logout-link
 	color:white;
 	text-align: center;
 }
-input[type='submit'],input[type='button'] /* universal style */
+input[type='submit'],input[type='button'],button /* universal style */
 {
 	background:#EDEADE;
 	color:#0000FF;
@@ -108,4 +108,45 @@ input[type='text'],input[type='password'] /* universal style */
 #tests,#results,#upload
 {
 	display:none;
+}
+table.standardTable
+{
+	font-family:inherit;
+	font-size:inherit;
+	background:#E6F2FF;
+	border:1px solid black;
+}
+table.standardTable th
+{
+	background:#5A768D;
+	color:white;
+	font-family:tahoma;
+	font-size:12px;
+	padding:5px;
+	border-right: 1px solid black;
+}
+table.standardTable td
+{
+	text-align: center;
+	border-right:1px solid black;
+	border-top:1px solid black;;
+	padding:5px;
+}
+td button
+{
+	background:white;
+	color:black;
+	border: 1px solid black;
+}
+.left10
+{
+	margin-left:10%;
+}
+.top10
+{
+	margin-top:10%;
+}
+.top5
+{
+	margin-top:5%;
 }

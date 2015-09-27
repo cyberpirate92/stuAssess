@@ -36,7 +36,18 @@
 				<div id='content-main'>
 					<div id='tests'>
 						<?php  
-
+							require_once('db.php');
+							$result = mysqli_query($db,"SELECT groupID FROM student_group WHERE username='$username'");
+							$groups = array(); // stores the groups the student belongs to...
+							while($row = mysqli_fetch_array($result))
+							{
+								array_push($groups, $row['groupID']);
+							}
+							foreach($groups as $group)
+							{
+								$result = mysqli_query($db,"SELECT * FROM tests WHERE groupID=$group");
+								// display the tests here
+							}
 						?>
 					</div>
 					<div id='results'>

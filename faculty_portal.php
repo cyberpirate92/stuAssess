@@ -108,10 +108,28 @@
 				</div>
 				<div id='content-main'>
 					<div id='tests'>
-						Tests
 						<?php  
 							require_once('db.php');
-							
+							$rowCount = 1;
+							$result = mysqli_query($db,"SELECT * FROM groups WHERE facultyID='$username'");
+							echo "<table class='standardTable left10 top5' width='50%' cellspacing='0px'>";
+							echo "<tr>";
+							echo "<th> Sl.No</th>";
+							echo "<th> Course Code </th>";
+							echo "<th> Course Slots </th>";
+							echo "<th></th>";
+							echo "<th></th>";
+							echo "</tr>";
+							while($row = mysqli_fetch_array($result))
+							{
+								$courseCode = $row['CourseCode'];
+								$courseSlot = $row['CourseSlot'];
+								$link = "createMCQTest.php?id=".$row['groupID'];
+								$link1 = "createCodeTest.php?id=".$row['groupID'];
+								echo "<tr><td> $rowCount </td><td> $courseCode </td> <td> $courseSlot </td> <td> <a href='$link'><button>Create MCQ Test</button><a></td> <td> <a href='$link1'><button>Create Code Test</button><a></td> </tr>";
+								$rowCount++;
+							}
+							echo "</table>";
 						?>
 					</div>
 					<div id='results'>

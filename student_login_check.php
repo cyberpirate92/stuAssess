@@ -5,7 +5,7 @@
 	}
 	if(isset($_SESSION['username']) && isset($_SESSION['type']) && $_SESSION['type'] == 'student')
 	{
-
+		$username = $_SESSION['username'];
 	}
 	else
 	{
