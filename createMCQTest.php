@@ -1,5 +1,6 @@
 <?php
 	require_once('faculty_login_check.php');
+	require_once('util.php');
 	if(!empty($_GET))
 	{
 		require_once("db.php");
