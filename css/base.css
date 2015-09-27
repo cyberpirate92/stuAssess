@@ -1,0 +1,111 @@
+body
+{
+	font-family:verdana;
+	font-size:13px;
+}
+#header
+{
+	width:100%;
+	background:#0D304E;
+}
+#header-logo
+{
+	padding-top: 0px;
+	padding:10px;
+}
+#header-logo img
+{
+	width:295px;
+	height:73px;
+}
+#black-div table
+{
+	width:100%;
+	background:black;
+	color:white;
+	font-family:verdana;
+	font-size: 13;
+	padding:0px;
+}
+a.logout-link
+{
+	text-decoration: none;
+	font-family: inherit;
+	color:white;
+	font-weight: bold;
+	font-size: 12px;
+}
+#wrapper
+{
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+#header-title
+{
+	padding-top:1%;
+	width:71%;
+	float:right;
+	text-align: left;
+	color: white;
+	line-height:1;
+}
+#header-title span
+{
+	font-family: 'Comic Sans MS';
+	font-size: 1.5em;
+}
+#footer
+{
+	padding:10px;
+	width:100%;
+	position:fixed;
+	bottom:0;
+	background:#0D304E;
+	font-family: tahoma;
+	font-size: 12px;
+	color:white;
+	text-align: center;
+}
+input[type='submit'],input[type='button'] /* universal style */
+{
+	background:#EDEADE;
+	color:#0000FF;
+	font-family: verdana;
+	font-weight: bold;
+	font-size: 10px;
+	border:none;
+}
+input[type='text'],input[type='password'] /* universal style */
+{
+	font-family:verdana;
+	font-size:10px;
+	border:1px solid black;
+}
+#content-sidebar
+{
+	padding-top:50px;
+	padding-left:50px;
+	position:fixed;
+	width:240px;
+	height:100%;
+	background-image:url('../images/sidebar-pattern.gif');
+}
+#content-sidebar ul
+{
+	font-family:verdana;
+	font-weight:bold;
+	font-size:12px;
+	cursor:pointer;
+}
+#content-main
+{
+	margin-left:291px;
+	padding:9px;
+}
+#tests,#results,#upload
+{
+	display:none;
+}
