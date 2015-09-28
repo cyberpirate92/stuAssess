@@ -51,6 +51,22 @@
 				<div id='content-sidebar'>
 					<!-- TODO: get input for number of questions and other data (time, date etc..) and display question number boxes -->
 					<!-- ALSO: don't forget to add questions via excel file for more flexibility -->
+					<form action='createMCQTest.php' method='POST'>
+						<div id='preQuestion'>
+							<div class='datetime'>
+								Test Start : <input type='text' name='startDateTime'>
+							</div>
+							<div class='datetime'>
+								Test End : <input type='text' name='endDateTime'>
+							</div>
+							<div>
+								Number of Questions : <input type='number' min='1' step='1' max='50' name='nQuestions'>
+							</div>
+							<div>
+								<input type='submit' value='Go'>
+							</div>
+						</div>
+					</form>
 				</div>
 				<div id='content-main'>
 					<!-- TODO: Questions can be added here after providing input for number of questions and other required info-->
