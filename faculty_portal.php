@@ -6,7 +6,7 @@
 	{
 		if(isset($_POST['classInfoUpload'])) // file upload form is submitted.
 		{
-			require_once('phpExcelReader/parse.php');
+			require_once('parse.php');
 			$upload_dir = "faculty_uploads/";
 
 			// generating name in following format : facultyID_courseCode_courseSlot
