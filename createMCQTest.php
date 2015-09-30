@@ -1,3 +1,4 @@
+<!-- Refer for documentation [jquery-timepicker-addon] : http://trentrichardson.com/examples/timepicker/ -->
 <?php
 	require_once('faculty_login_check.php');
 	require_once('util.php');
@@ -42,7 +43,55 @@
 	<head>
 		<title> Student Assesment </title>
 		<link rel='stylesheet' href='css/base.css'>
-		<script src='js/jquery-2.1.4.min.js' type='text/javascript'></script>
+		<script type='text/javascript' src='js/jquery-2.1.4.min.js'></script>
+		<script></script>
+		<link rel='stylesheet' href='js/jquery-ui-1.11.4/jquery-ui.min.css'>
+		<link rel='stylesheet' href='css/jquery.jquery-ui-timepicker-addon.min.css'>
+		<script type='text/javascript' src='js/jquery-ui-1.11.4/jquery-ui.min.js'></script>
+		<script type='text/javascript' src='js/jquery-ui-timepicker-addon.min.js'></script>
+		<script type='text/javascript'>
+			$(function(){
+				var x = document.createElement("input");
+				x.setAttribute("type","date");
+				if(x.type != "date")
+				{
+					$("#startDate").datepicker({minDate:+0,maxDate:+30});
+					$("#endDate").datepicker({minDate:+0,maxDate:+30});
+				}
+
+				x = document.createElement("input");
+				x.setAttribute("type","time");
+				if(x.type != "time")
+				{
+					$("#startTime").timepicker({disableTextInput:true});
+					$("#endTime").timepicker();
+				}
+			});
+
+			function debug()
+			{
+				var startDate = convertToString($("#startDate").datepicker("getDate"));
+				var endDate = convertToString($("#endDate").datepicker("getDate"));
+				alert(startDate+" to "+endDate);
+			}
+
+			function convertToString(dateObj)
+			{
+				return dateObj.getDate()+"/"+(dateObj.getMonth()+1)+"/"+dateObj.getFullYear();
+			}
+
+			function setMinEndDate(obj)
+			{
+				var _MAX = 30;  // maximum number of days which a test could be active
+				var startDate = $(obj).datepicker("getDate");
+				var endDate = $(obj).datepicker("getDate");
+
+				endDate.setDate(startDate.getDate() + _MAX);
+
+				$("#endDate").datepicker("destroy");
+				$("#endDate").datepicker({minDate:startDate,maxDate:endDate});
+			}
+		</script>
 	</head>
 	<body>
 		<div id='wrapper'>
@@ -54,15 +103,20 @@
 					<form action='createMCQTest.php' method='POST'>
 						<div id='preQuestion'>
 							<div class='datetime'>
-								Test Start : <input type='text' name='startDateTime'>
+								<p class='block-title'> Test Start </p>
+								<input type='date' name='startDate' placeholder='Date' id='startDate' onchange="setMinEndDate(this)" />
+								<input type='time' name='startTime' placeholder='Time' id='startTime' />
 							</div>
 							<div class='datetime'>
-								Test End : <input type='text' name='endDateTime'>
+								<p class='block-title'> Test End </p>
+								<input type='date' name='endDate' placeholder='Date' id='endDate' />
+								<input type='time' name='endTime' placeholder='Time' id='endTime' />
 							</div>
 							<div>
 								Number of Questions : <input type='number' min='1' step='1' max='50' name='nQuestions'>
 							</div>
 							<div>
+								<input type='button' onclick="debug()" value='debug'>
 								<input type='submit' value='Go'>
 							</div>
 						</div>
