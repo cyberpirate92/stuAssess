@@ -57,6 +57,11 @@
 				</div>
 				<div id='content-main'>
 					<div id='tests'>
+						<form action='new_MCQ_Test.php' method='POST'>
+							Questions: <input type='number' name='nQuestions'><br>
+							Test Name: <input type='text' name='testName'>
+							<input type='submit' value='Go'>
+						</form>
 						<?php  
 							require_once('db.php');
 							$rowCount = 1;
