@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.4.13.1deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 28, 2015 at 03:58 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: Dec 19, 2015 at 11:03 PM
+-- Server version: 5.6.27-0ubuntu1
+-- PHP Version: 5.6.11-1ubuntu3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `asr`
+-- Database: `ASR`
 --
 
 -- --------------------------------------------------------
@@ -28,8 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `admin_login` (
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  PRIMARY KEY (`username`)
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -40,8 +39,7 @@ CREATE TABLE IF NOT EXISTS `admin_login` (
 
 CREATE TABLE IF NOT EXISTS `faculty_login` (
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  PRIMARY KEY (`username`)
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -63,9 +61,8 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `facultyID` int(11) NOT NULL,
   `CourseCode` varchar(8) NOT NULL,
   `CourseSlot` varchar(20) NOT NULL,
-  `groupID` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`groupID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `groupID` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groups`
@@ -86,10 +83,9 @@ INSERT INTO `groups` (`facultyID`, `CourseCode`, `CourseSlot`, `groupID`) VALUES
 CREATE TABLE IF NOT EXISTS `student_group` (
   `username` varchar(100) NOT NULL,
   `groupID` int(11) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `CourseSlot` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
+  `id` int(11) NOT NULL,
+  `CourseSlot` varchar(20) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student_group`
@@ -181,8 +177,7 @@ INSERT INTO `student_group` (`username`, `groupID`, `id`, `CourseSlot`) VALUES
 
 CREATE TABLE IF NOT EXISTS `student_login` (
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  PRIMARY KEY (`username`)
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -201,11 +196,43 @@ INSERT INTO `student_login` (`username`, `password`) VALUES
 CREATE TABLE IF NOT EXISTS `tests` (
   `faculty_id` int(11) NOT NULL,
   `test_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `start_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
-  PRIMARY KEY (`test_id`)
+  `group_id` int(11) DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `test_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tests`
+--
+
+INSERT INTO `tests` (`faculty_id`, `test_id`, `group_id`, `start_time`, `end_time`, `test_name`) VALUES
+(500001, 62572, NULL, NULL, NULL, 'MSSE 01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_62572`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_62572` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_62572`
+--
+
+INSERT INTO `test_code_62572` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('klmrlk', 'lnl', 'nkj', 'nkjnkj', 'jnjk', 'kjnk', 'njkn\r\njknk', 1),
+('jkrknknj\r\njgnnlgb\r\nfdl', 'kjnk', 'hkb\r\ntglrb', 'kgbkjbg\r\ngflnbgf', 'bkb', 'khbkbg\r\nfgjlfgb\r\nkjjgb', 'kkbgkd\r\ngbk', 2);
 
 -- --------------------------------------------------------
 
@@ -217,10 +244,85 @@ CREATE TABLE IF NOT EXISTS `test_result` (
   `test_id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `score` int(11) NOT NULL,
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin_login`
+--
+ALTER TABLE `admin_login`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `faculty_login`
+--
+ALTER TABLE `faculty_login`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`groupID`);
+
+--
+-- Indexes for table `student_group`
+--
+ALTER TABLE `student_group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_login`
+--
+ALTER TABLE `student_login`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `tests`
+--
+ALTER TABLE `tests`
+  ADD PRIMARY KEY (`test_id`);
+
+--
+-- Indexes for table `test_code_62572`
+--
+ALTER TABLE `test_code_62572`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_result`
+--
+ALTER TABLE `test_result`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `groupID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `student_group`
+--
+ALTER TABLE `student_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `test_code_62572`
+--
+ALTER TABLE `test_code_62572`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `test_result`
+--
+ALTER TABLE `test_result`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

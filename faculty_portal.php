@@ -57,34 +57,56 @@
 				</div>
 				<div id='content-main'>
 					<div id='tests'>
-						<form action='new_MCQ_Test.php' method='POST'>
-							Questions: <input type='number' name='nQuestions'><br>
-							Test Name: <input type='text' name='testName'>
-							<input type='submit' value='Go'>
-						</form>
-						<?php  
-							require_once('db.php');
-							$rowCount = 1;
-							$result = mysqli_query($db,"SELECT * FROM groups WHERE facultyID='$username'");
-							echo "<table class='standardTable left10 top5' width='50%' cellspacing='0px'>";
-							echo "<tr>";
-							echo "<th> Sl.No</th>";
-							echo "<th> Course Code </th>";
-							echo "<th> Course Slots </th>";
-							echo "<th></th>";
-							echo "<th></th>";
-							echo "</tr>";
-							while($row = mysqli_fetch_array($result))
-							{
-								$courseCode = $row['CourseCode'];
-								$courseSlot = $row['CourseSlot'];
-								$link = "createMCQTest.php?id=".$row['groupID'];
-								$link1 = "createCodeTest.php?id=".$row['groupID'];
-								echo "<tr><td> $rowCount </td><td> $courseCode </td> <td> $courseSlot </td> <td> <a href='$link'><button>Create MCQ Test</button><a></td> <td> <a href='$link1'><button>Create Code Test</button><a></td> </tr>";
-								$rowCount++;
-							}
-							echo "</table>";
-						?>
+						
+						<div class='block'>
+							<h3> Upload MCQ Test </h3>
+							<form action='#' method='POST'>
+								File: <input type="file" name='mcq_test_file'>
+								<input type='submit' value='Upload MCQ Test'>
+							</form>
+						</div>
+
+						<div class='block'>
+							<h3> Create Code Test online </h3>
+							<form action='createCodeTest.php' method='POST'>
+								Questions: <input type='number' name='nQuestions'><br>
+								Test Name: <input type='text' name='testName'>
+								<input type='submit' value='Go'>
+							</form>
+						</div>
+
+						<div class='block'>
+							<h3> Tests Created </h3>
+							<?php
+								require("db.php");
+								$query = "SELECT test_id,test_name FROM tests WHERE faculty_id=$username";
+								$result = mysqli_query($db,$query);
+								if(mysqli_num_rows($result) > 0)
+								{
+									$count = 1;
+									echo "<table class='standardTable left10 top5' width='50%' cellspacing='0px'>";
+									echo "<tr>";
+									echo "<th> S.NO </th>";
+									echo "<th> Test Name </th> ";
+									echo "<th> Test ID </th>";
+									echo "</tr>";
+									while($row=mysqli_fetch_array($result))
+									{
+										echo "<tr>";
+										echo "<td>".($count++)."</td>";
+										echo "<td>".$row['test_name']."</td>";
+										echo "<td>".$row['test_id']."</td>";
+										echo "</tr>";
+									}
+									echo "</table>";
+								}
+								else
+								{
+									echo "<p>  The tests you create will appear here. </p>";
+								}
+								mysqli_close($db);
+							?>
+						</div>
 					</div>
 					<div id='results'>
 						Results
