@@ -69,7 +69,7 @@
 						<div class='block'>
 							<h3> Create Code Test online </h3>
 							<form action='createCodeTest.php' method='POST'>
-								Questions: <input type='number' name='nQuestions'><br>
+								Questions: <input type='text' name='nQuestions'><br>
 								Test Name: <input type='text' name='testName'>
 								<input type='submit' value='Go'>
 							</form>
@@ -79,7 +79,7 @@
 							<h3> Tests Created </h3>
 							<?php
 								require("db.php");
-								$query = "SELECT test_id,test_name FROM tests WHERE faculty_id=$username";
+								$query = "SELECT test_id,test_name,test_type FROM tests WHERE faculty_id=$username";
 								$result = mysqli_query($db,$query);
 								if(mysqli_num_rows($result) > 0)
 								{
@@ -89,13 +89,16 @@
 									echo "<th> S.NO </th>";
 									echo "<th> Test Name </th> ";
 									echo "<th> Test ID </th>";
+									echo "<th> Test Type </th>";
 									echo "</tr>";
 									while($row=mysqli_fetch_array($result))
 									{
+										$testID = $row['test_id']; // for viewing a particular test.
 										echo "<tr>";
 										echo "<td>".($count++)."</td>";
-										echo "<td>".$row['test_name']."</td>";
+										echo "<td> <a href='viewTest.php?id=$testID'> ".$row['test_name']." </a> </td>";
 										echo "<td>".$row['test_id']."</td>";
+										echo "<td>".$row['test_type']."</td>";
 										echo "</tr>";
 									}
 									echo "</table>";

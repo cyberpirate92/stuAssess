@@ -146,6 +146,10 @@ td button
 	color:black;
 	border: 1px solid black;
 }
+.standardTable a
+{
+	text-decoration: none;
+}
 .left10
 {
 	margin-left:10%;
