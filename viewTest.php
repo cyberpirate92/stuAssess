@@ -49,8 +49,8 @@
 								$table_html.= "<th colspan='2'>Testcase 3</th>";
 								$table_html.= "</tr>";
 								$table_html.= "<tr>";
-								$table_html.= "<td>&nbsp;</td>";
-								$table_html.= "<td>&nbsp;</td>";
+								$table_html.= "<th>&nbsp;</th>";
+								$table_html.= "<th>&nbsp;</th>";
 								for($i=0;$i<3;$i++)
 								{
 									$table_html.= "<th>Input</th>";
@@ -123,7 +123,7 @@
 				<div id='content-main'>
 					<?php
 						if(!empty($table_html))
-							echo $table_html;
+							echo nl2br($table_html);
 					?>
 				</div>
 			</div>

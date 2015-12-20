@@ -93,7 +93,7 @@
 					{
 						// All questions have been created, now add the entry to the tests table and redirect to the portal page.
 						require("db.php");
-						$query = "INSERT INTO tests (faculty_id,test_id,test_name) VALUES($username,".$_SESSION['_test_id'].",'".$_SESSION['_test_name']."')";
+						$query = "INSERT INTO tests (faculty_id,test_id,test_name,test_type) VALUES($username,".$_SESSION['_test_id'].",'".$_SESSION['_test_name']."','CODE')";
 						mysqli_query($db,$query);
 						mysqli_close($db);
 						echo "<script>alert('Test Added Successfully.'); window.location='faculty_portal.php'</script>";
