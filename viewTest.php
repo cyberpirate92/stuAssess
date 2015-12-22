@@ -70,7 +70,9 @@
 									$table_html.= "<td>".$table_row['output3']."</td>";
 									$table_html.= "</tr>";
 								}
-								$table_html.= "</table>";
+								$table_html.= "</table><br>";
+
+								$table_html.= "<a href='assignTest.php?id='$testID' class='linkButton'> Assign Test </a>";
 							}
 							else
 							{
@@ -103,7 +105,6 @@
 		}
 	}
 ?>
-
 <html>
 	<head>
 		<title> Student Assesment </title>

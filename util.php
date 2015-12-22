@@ -13,13 +13,15 @@
 		}
 		public function setData($q,$i1,$i2,$i3,$o1,$o2,$o3)
 		{
-			$this->question = $q;
-			$this->input1 = $i1;
-			$this->input2 = $i2;
-			$this->input3 = $i3;
-			$this->output1 = $o1;
-			$this->output2 = $o2;
-			$this->output3 = $o3;
+			// use of mysqli_real_escape_string escapes special characters so that they dont lead to SQL injections
+			require("db.php");
+			$this->question = mysqli_real_escape_string($db,$q);
+			$this->input1 = mysqli_real_escape_string($db,$i1);
+			$this->input2 = mysqli_real_escape_string($db,$i2);
+			$this->input3 = mysqli_real_escape_string($db,$i3);
+			$this->output1 = mysqli_real_escape_string($db,$o1);
+			$this->output2 = mysqli_real_escape_string($db,$o2);
+			$this->output3 = mysqli_real_escape_string($db,$o3);
 		}
 	}	
 

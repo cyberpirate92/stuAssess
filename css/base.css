@@ -162,3 +162,13 @@ td button
 {
 	margin-top:5%;
 }
+a.linkButton
+{
+	text-decoration:none;
+	background:#EDEADE;
+	color:#0000FF;
+	font-family: verdana;
+	font-weight: bold;
+	font-size: 10px;
+	border:none;
+}
