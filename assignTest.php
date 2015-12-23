@@ -22,6 +22,9 @@
 	if(!empty($_GET) && isset($_GET['id']))
 	{
 		$testID = $_GET['id'];
+		if(session_status() != PHP_SESSION_ACTIVE)
+			session_start();
+		$_SESSION['_test_id'] = $testID; // this is used later...
 	}
 	else if(!empty($_POST))
 	{
@@ -58,6 +61,7 @@
 			$endTime_hours = $_POST['endtime_hours'];
 			$endTime_mins = $_POST['endtime_mins'];
 
+			/* for debugging....
 			var_dump($groupID);
 			var_dump($startDate);
 			var_dump($startTime_hours);
@@ -65,6 +69,37 @@
 			var_dump($endDate);
 			var_dump($endTime_hours);
 			var_dump($endTime_mins);
+			*/
+
+			$Start_DateTime = new DateTime(convertDateFormat($startDate)." ".$startTime_hours.":".$startTime_mins.":0");
+			$End_DateTime   = new DateTime(convertDateFormat($endDate)." ".$endTime_hours.":".$endTime_mins.":0");
+			if($Start_DateTime >= $End_DateTime)
+			{
+				var_dump($Start_DateTime);
+				var_dump($End_DateTime);
+				array_push($errors,"Start Date must be before end date");
+			}
+			else
+			{
+				if(isset($_SESSION['_test_id']))
+				{
+					// write to tests table...
+					$Start_DateTime = $Start_DateTime->format("Y-m-d H:i:s");
+					$End_DateTime = $End_DateTime->format("Y-m-d H:i:s");
+					require("db.php");
+					$testID = $_SESSION['_test_id'];
+					$query = "UPDATE tests SET group_id=$groupID,start_time='$Start_DateTime',end_time='$End_DateTime' WHERE test_id=$testID AND faculty_id=$username";
+					echo "<script>console.log('".addslashes($query)."');</script>";
+					echo "<script>console.log('$testID')</script>";
+					echo "<script>console.log('".$_SESSION['_test_id']."')</script>";
+					mysqli_query($db,$query);
+					echo "<script>alert('Test Assigned succesfully.');window.location='faculty_portal.php';</script>";
+				}
+				else
+				{
+					// login again and try,... something went wrong, no session variable
+				}
+			}
 		}
 	}
 	else

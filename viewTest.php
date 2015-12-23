@@ -71,7 +71,7 @@
 								}
 								$table_html.= "</table><br>";
 
-								$table_html.= "<a href='assignTest.php?id='$testID' class='linkButton'> Assign Test </a>";
+								$table_html.= "<a href='assignTest.php?id=$testID' class='linkButton'> Assign Test </a>";
 							}
 							else
 							{

@@ -77,4 +77,35 @@
 		$var = trim($var);
 		return (isset($var) && !empty($var));
 	}
+	function convertDateFormat($dateString) // convert date format from dd-mm-yyyy to yyyy-mm-dd
+	{
+		if(preg_match('/^\d{2}-\d{2}-\d{4}$/', $dateString)) // is the string matching the dd-mm-yyyy pattern ?
+		{
+			$dateString = trim($dateString);
+			$tokens = explode("-", $dateString);
+			return $tokens[2]."-".$tokens[1]."-".$tokens[0];
+		}
+		else // ERROR: the string dies not follow the pattern
+		{
+			return null;
+		}
+	}
+	function getCourseCodeAndSlot($groupID,$facultyID) // returns the CourseCode+Slot string, for the provided groupID from the groups table
+	{
+		require("db.php");
+		$query = "SELECT CourseCode, CourseSlot FROM groups WHERE groupID=$groupID AND facultyID=$facultyID";
+		$result = mysqli_query($db,$query);
+		if(mysqli_num_rows($result) > 0)
+		{
+			$row = mysqli_fetch_array($result);
+			$return_value = $row['CourseCode']." (".$row['CourseSlot'].")";
+			mysqli_close($db);
+			return $return_value;
+		}
+		else
+		{
+			mysql_close($db);
+			return null;
+		}
+	}
 ?>

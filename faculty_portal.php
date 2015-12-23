@@ -110,6 +110,47 @@
 								mysqli_close($db);
 							?>
 						</div>
+
+						<div class='block'>
+							<h3> Tests Assigned </h3>
+							<?php
+								require("db.php");
+								$query = "SELECT * FROM tests WHERE faculty_id=$username AND group_id!=''";
+								$result = mysqli_query($db,$query);
+								if(mysqli_num_rows($result) > 0)
+								{
+									$count = 1;
+									echo "<table class='standardTable left10 top5' width='50%' cellspacing='0px'>";
+									echo "<tr>";
+									echo "<th> S.NO </th>";
+									echo "<th> Test Name </th> ";
+									echo "<th> Test ID </th>";
+									echo "<th> Test Type </th>";
+									echo "<th> Class Assigned </th>";
+									echo "<th> Test Start Date </th>";
+									echo "<th> Test End Date </th>";
+									echo "</tr>";
+
+									while($row=mysqli_fetch_array($result))
+									{
+										$testID = $row['test_id']; // for viewing a particular test.
+										$class_assigned = getCourseCodeAndSlot($row['group_id'],$username); // function def in util.php
+										$start_time = new DateTime($row['start_time']);
+										$end_time = new DateTime($row['end_time']);
+										echo "<tr>";
+										echo "<td>".($count++)."</td>";
+										echo "<td> ".$row['test_name']."</td>";
+										echo "<td>".$row['test_id']."</td>";
+										echo "<td>".$row['test_type']."</td>";
+										echo "<td>".$class_assigned."</td>";
+										echo "<td>".$start_time->format("d/M/Y H:m")."</td>";
+										echo "<td>".$end_time->format("d/M/Y H:m")."</td>";
+										echo "</tr>";
+									}
+									echo "</table>";
+								}
+							?>
+						</div>
 					</div>
 					<div id='results'>
 						Results
