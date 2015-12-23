@@ -11,7 +11,6 @@
 			require("db.php");
 			// first, checking if the test ID is a valid ID by looking at the tests table.
 			$query = "SELECT test_type FROM tests WHERE faculty_id=$username AND test_id=$testID";
-			echo "<script>console.log('$query')</script>";
 			$result = mysqli_query($db,$query);
 			if(mysqli_num_rows($result) > 0)
 			{
@@ -93,8 +92,7 @@
 			else
 			{
 				require_once("util.php");
-				echo "<script> console.log('so dumb'); </script>";
-				//redirectTo("login.php");
+				redirectTo("login.php");
 			}
 		}
 		else
