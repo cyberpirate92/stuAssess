@@ -147,8 +147,8 @@
 										echo "<td>".$row['test_id']."</td>";
 										echo "<td>".$row['test_type']."</td>";
 										echo "<td>".$class_assigned."</td>";
-										echo "<td>".$start_time->format("d/M/Y H:m")."</td>";
-										echo "<td>".$end_time->format("d/M/Y H:m")."</td>";
+										echo "<td>".$start_time->format("d M Y H:m")."</td>";
+										echo "<td>".$end_time->format("d M Y H:m")."</td>";
 										echo "</tr>";
 									}
 									echo "</table>";

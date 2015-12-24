@@ -124,6 +124,8 @@
 						if(!empty($table_html))
 							echo nl2br($table_html);
 					?>
+					<br><br>
+					<a class='linkButton' href='faculty_portal.php'> Go Back </a>
 				</div>
 			</div>
 			<div id='footer'>

@@ -24,6 +24,7 @@
 			$_SESSION['_test_id'] = $test_id;
 			$_SESSION['_test_name'] = $testName;
 			$_SESSION['_test_duration'] = $testDuration;
+			$_SESSION['_test_type'] = "CODE";
 
 			createNewCodeTestTable($username,$test_id,$testName);
 		}
@@ -37,6 +38,7 @@
 				unset($_SESSION["_test_id"]);
 				unset($_SESSION["_test_name"]);
 				unset($_SESSION["_test_duration"]);
+				unset($_SESSION["_test_type"]);
 				redirectTo("faculty_portal.php");
 				header('Location: faculty_portal.php');
 				die('');
@@ -137,6 +139,7 @@
 			<div id='content'>
 				<div id='content-main'>
 					<h2> Question Number : <?php echo ($currentQuestion+1); ?> </h2>
+					<a class='linkButton' href='discardTest.php'>Discard Test</a>
 					<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST'>
 						<h2> Question: </h2>
 						<textarea name='question' rows='10' cols='60'><?php /*TODO: if already entered, fill this*/ ?></textarea>

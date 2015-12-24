@@ -146,4 +146,49 @@
 		else
 			return "0 mins";
 	}
+	function deleteTable($table_name) // function to delete a given table
+	{
+		$table_name = trim($table_name);
+		if(!empty($table_name))
+		{
+			require('db.php');
+			$table_name = mysqli_real_escape_string($db,$table_name); // to prevent SQL injection attacks, (not likely to happen, but still..)
+			$query = "DROP TABLE ".$table_name;
+			echo "<script>console.log('".addslashes($query)."')</script>"; // FOR DEBUGGING... remove this afterwards
+			mysqli_query($db,$query);
+			mysqli_close($db);
+		}
+	}
+	// returns the test type (Code,MCQ) of the given testID,
+	// NOTE: the test must have been completely created, this function wont work while test creation is in process
+	function getTestType($testID)
+	{
+		require('db.php');
+		$query = "SELECT test_type FROM tests WHERE test_id=$testID";
+		$result = mysqli_query($db,$query);
+		if(mysqli_num_rows($result)>0)
+		{
+			$row = mysqli_fetch_array($result);
+			$type = $row['test_type'];
+			return $type;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	function getTableName($testID) // returns the respective table name provided the test id.
+	{
+		$table_name = null;
+		$test_type = getTestType($testID);
+		if($test_type == "CODE")
+		{
+			$table_name = "test_code_".$testID;
+		}
+		else if($test_type == "MCQ")
+		{	
+			$table_name = "test_mcq_".$testID;
+		}
+		return $table_name;
+	}
 ?>
