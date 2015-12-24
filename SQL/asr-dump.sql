@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2015 at 11:03 PM
+-- Generation Time: Dec 24, 2015 at 08:04 AM
 -- Server version: 5.6.27-0ubuntu1
 -- PHP Version: 5.6.11-1ubuntu3.1
 
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `faculty_login` (
 
 INSERT INTO `faculty_login` (`username`, `password`) VALUES
 ('500001', 'd561c7c03c1f2831904823a95835ff5f'),
-('500002', 'e8647dce263d505d7b0d605a5d6c2d1b'),
-('500003', '28102e526765b0ac82736c2c205b94ab');
+('500002', 'd561c7c03c1f2831904823a95835ff5f'),
+('500003', 'd561c7c03c1f2831904823a95835ff5f');
 
 -- --------------------------------------------------------
 
@@ -199,15 +199,96 @@ CREATE TABLE IF NOT EXISTS `tests` (
   `group_id` int(11) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
-  `test_name` varchar(255) NOT NULL
+  `test_name` varchar(255) NOT NULL,
+  `test_type` enum('CODE','MCQ') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tests`
 --
 
-INSERT INTO `tests` (`faculty_id`, `test_id`, `group_id`, `start_time`, `end_time`, `test_name`) VALUES
-(500001, 62572, NULL, NULL, NULL, 'MSSE 01');
+INSERT INTO `tests` (`faculty_id`, `test_id`, `group_id`, `start_time`, `end_time`, `test_name`, `test_type`) VALUES
+(500001, 21899, NULL, NULL, NULL, 'MCA 01', 'CODE'),
+(500001, 41230, 1, '2015-12-23 10:10:00', '2015-12-23 13:25:00', 'MSSE 02', 'CODE'),
+(500002, 60160, NULL, NULL, NULL, 'msse', 'CODE'),
+(500001, 62572, 2, '2015-12-25 10:30:00', '2015-12-26 10:30:00', 'MSSE 01', 'CODE'),
+(500001, 80099, NULL, NULL, NULL, 'SQL', 'CODE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_21899`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_21899` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_21899`
+--
+
+INSERT INTO `test_code_21899` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('Print the next 3 numbers', '2', '7', '10', '3\r\n4\r\n5', '8\r\n9\r\n10', '11\r\n12\r\n13', 1),
+('Input consists of 2 lines.\r\nLine 1 contains a word x\r\nLine 2 contains a number n\r\n\r\nOutput should be x printed n times', 'hello\r\n2', 'what\r\n3', 'x\r\n1', 'hello\r\nhello', 'what\r\nwhat\r\nwhat', 'x', 2),
+('Input\r\nThe first line contains 2 numbers a and b separated by space\r\nThe second line contains a number c\r\n\r\nOutput\r\noutput a single number,the result of (a+b)*c', '5 6\r\n2', '2 3\r\n7', '6 2\r\n5', '22', '42', '60', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_41230`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_41230` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_41230`
+--
+
+INSERT INTO `test_code_41230` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('Write a program that accepts 2 numbers as input and outputs the result of addition', '2\r\n3', '4\r\n6', '8\r\n1', '5', '10', '9', 1),
+('Create a program that outputs the factorial of the input number', '2', '3', '5', '2', '6', '120', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_60160`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_60160` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_60160`
+--
+
+INSERT INTO `test_code_60160` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('jkhkbhbhb', 'hjbhjbhj\r\niljnkl\r\nlhbgk', 'mn n mn', 'hgvhgvghvghj\r\njkbbjk\r\njnjlkn', 'bkjb\r\nljkb', 'h\r\nkl\r\nklnlkmkl\r\n', 'hvjhbh\r\nkjbj', 1),
+('jkbhbhkbkh\r\n;lkljl\r\nljhk', 'jnl/,/hbk', 'jkbn/,kjbjg', 'jnkml/,lnbkhvj', 'knmnjkbjvhv', 'knknjbhjg', 'jnlmk\r\nlkkbhhjgfg', 2);
 
 -- --------------------------------------------------------
 
@@ -233,6 +314,31 @@ CREATE TABLE IF NOT EXISTS `test_code_62572` (
 INSERT INTO `test_code_62572` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
 ('klmrlk', 'lnl', 'nkj', 'nkjnkj', 'jnjk', 'kjnk', 'njkn\r\njknk', 1),
 ('jkrknknj\r\njgnnlgb\r\nfdl', 'kjnk', 'hkb\r\ntglrb', 'kgbkjbg\r\ngflnbgf', 'bkb', 'khbkbg\r\nfgjlfgb\r\nkjjgb', 'kkbgkd\r\ngbk', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_80099`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_80099` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_80099`
+--
+
+INSERT INTO `test_code_80099` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('!@#@!!@#!@":'';\r\n---''!', '!@#@!!@#!@":'';\r\n---''!', '!@#@!!@#!@":'';\r\n---''!', '!@#@!!@#!@":'';\r\n---''!', '!@#@!!@#!@":'';\r\n---''!', '!@#@!!@#!@":'';\r\n---''!', '!@#@!!@#!@":'';\r\n---''!', 1),
+('"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!', '"''`!@#fvsasd\r\nsf\r\nsa\r\ndf\r\nsadf@!!@#!@":'';\r\n--"''`"''`-''!', 'vgesrglarf\r\nawgsefawe\r\nwefwa', '"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!', 'fawfalergaw\r\narf\r\nw\r\nf"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!\r\negae', 'wr\r\nfa\r\nrga\r\nerg"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!', '"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!efmwefwr\r\nfa\r\nrga\r\nerg"''`!@#@!!@#!@":'';\r\n--"''`"''`-''!', 2);
 
 -- --------------------------------------------------------
 
@@ -288,9 +394,33 @@ ALTER TABLE `tests`
   ADD PRIMARY KEY (`test_id`);
 
 --
+-- Indexes for table `test_code_21899`
+--
+ALTER TABLE `test_code_21899`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_code_41230`
+--
+ALTER TABLE `test_code_41230`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_code_60160`
+--
+ALTER TABLE `test_code_60160`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `test_code_62572`
 --
 ALTER TABLE `test_code_62572`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_code_80099`
+--
+ALTER TABLE `test_code_80099`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -314,9 +444,29 @@ ALTER TABLE `groups`
 ALTER TABLE `student_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
 --
+-- AUTO_INCREMENT for table `test_code_21899`
+--
+ALTER TABLE `test_code_21899`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `test_code_41230`
+--
+ALTER TABLE `test_code_41230`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `test_code_60160`
+--
+ALTER TABLE `test_code_60160`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `test_code_62572`
 --
 ALTER TABLE `test_code_62572`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `test_code_80099`
+--
+ALTER TABLE `test_code_80099`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `test_result`

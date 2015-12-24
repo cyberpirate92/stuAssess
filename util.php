@@ -108,4 +108,21 @@
 			return null;
 		}
 	}
+	function getCourseCode($groupID) // for use in student_portal
+	{
+		require("db.php");
+		$query = "SELECT CourseCode FROM groups WHERE groupID=$groupID";
+		$result = mysqli_query($db,$query);
+		if(mysqli_num_rows($result) > 0)
+		{
+			$row = mysqli_fetch_array($result);
+			mysqli_close($db);
+			return $row['CourseCode'];
+		}
+		else
+		{
+			mysql_close($db);
+			return null;
+		}
+	}
 ?>

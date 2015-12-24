@@ -120,7 +120,7 @@
 								if(mysqli_num_rows($result) > 0)
 								{
 									$count = 1;
-									echo "<table class='standardTable left10 top5' width='50%' cellspacing='0px'>";
+									echo "<table class='standardTable left10 top5' width='75%' cellspacing='0px'>";
 									echo "<tr>";
 									echo "<th> S.NO </th>";
 									echo "<th> Test Name </th> ";
@@ -149,6 +149,11 @@
 									}
 									echo "</table>";
 								}
+								else
+								{
+									echo "<p> You have not assigned any tests yet </p>";
+								}
+								mysqli_close($db);
 							?>
 						</div>
 					</div>
