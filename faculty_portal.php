@@ -71,6 +71,7 @@
 							<form action='createCodeTest.php' method='POST'>
 								Questions: <input type='text' name='nQuestions'><br>
 								Test Name: <input type='text' name='testName'>
+								Test Duration : <input type='text' name='testDuration'>
 								<input type='submit' value='Go'>
 							</form>
 						</div>
@@ -79,7 +80,8 @@
 							<h3> Tests Created </h3>
 							<?php
 								require("db.php");
-								$query = "SELECT test_id,test_name,test_type FROM tests WHERE faculty_id=$username";
+								require_once("util.php");
+								$query = "SELECT test_id,test_name,test_type,test_duration FROM tests WHERE faculty_id=$username";
 								$result = mysqli_query($db,$query);
 								if(mysqli_num_rows($result) > 0)
 								{
@@ -90,6 +92,7 @@
 									echo "<th> Test Name </th> ";
 									echo "<th> Test ID </th>";
 									echo "<th> Test Type </th>";
+									echo "<th> Test Duration </th>";
 									echo "</tr>";
 									while($row=mysqli_fetch_array($result))
 									{
@@ -99,6 +102,7 @@
 										echo "<td> <a href='viewTest.php?id=$testID'> ".$row['test_name']." </a> </td>";
 										echo "<td>".$row['test_id']."</td>";
 										echo "<td>".$row['test_type']."</td>";
+										echo "<td>".getTimeString($row['test_duration'])."</td>";
 										echo "</tr>";
 									}
 									echo "</table>";

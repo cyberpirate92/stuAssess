@@ -4,12 +4,14 @@
 	$currentQuestion=0;
 	if(!empty($_POST))
 	{
-		if(isValidVariable($_POST['nQuestions']) && isValidVariable($_POST['testName']))
+		if(isValidVariable($_POST['nQuestions']) && isValidVariable($_POST['testName']) && isValidVariable($_POST['testDuration']))
 		{
 			$nQuestions = $_POST['nQuestions'];
 			$testName = $_POST['testName'];
+			$testDuration = $_POST['testDuration'];
 			unset($_POST['nQuestions']);
 			unset($_POST['testName']);
+			unset($_POST['testDuration']);
 
 			$test_id = rand(constant("TEST_ID_RANGE_START"),constant("TEST_ID_RANGE_END"));
 			while(test_id_exists($test_id))
@@ -21,6 +23,7 @@
 			$_SESSION['_totalQuestions'] = $nQuestions;
 			$_SESSION['_test_id'] = $test_id;
 			$_SESSION['_test_name'] = $testName;
+			$_SESSION['_test_duration'] = $testDuration;
 
 			createNewCodeTestTable($username,$test_id,$testName);
 		}
@@ -33,6 +36,7 @@
 				unset($_SESSION["_questionNumber"]);
 				unset($_SESSION["_test_id"]);
 				unset($_SESSION["_test_name"]);
+				unset($_SESSION["_test_duration"]);
 				redirectTo("faculty_portal.php");
 				header('Location: faculty_portal.php');
 				die('');
@@ -93,7 +97,8 @@
 					{
 						// All questions have been created, now add the entry to the tests table and redirect to the portal page.
 						require("db.php");
-						$query = "INSERT INTO tests (faculty_id,test_id,test_name,test_type) VALUES($username,".$_SESSION['_test_id'].",'".$_SESSION['_test_name']."','CODE')";
+						$query = "INSERT INTO tests (faculty_id,test_id,test_name,test_type,test_duration) VALUES($username,".$_SESSION['_test_id'].",'".$_SESSION['_test_name']."','CODE',".$_SESSION['_test_duration'].")";
+						echo "<script>console.log('".addslashes($query)."');</script>";
 						mysqli_query($db,$query);
 						mysqli_close($db);
 						echo "<script>alert('Test Added Successfully.'); window.location='faculty_portal.php'</script>";
@@ -116,6 +121,7 @@
 	}
 	else
 	{
+		//echo "<script>console.log('else condition');</script>";
 		redirectTo('faculty_portal.php');
 	}
 ?>

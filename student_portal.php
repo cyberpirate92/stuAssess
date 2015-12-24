@@ -6,24 +6,7 @@
 		<title> Student Assesment </title>
 		<link rel='stylesheet' href='css/base.css'>
 		<script src='js/jquery-2.1.4.min.js' type='text/javascript'></script>
-		<script type='text/javascript'>
-			function viewTests() 
-			{
-				$('#option-test').css('color','red');
-				$('#option-result').css('color','black');
-				
-				$('#tests').css('display','block');
-				$('#results').css('display','none');
-			}
-			function viewResults() 
-			{
-				$('#option-test').css('color','black');
-				$('#option-result').css('color','red');
-
-				$('#tests').css('display','none');
-				$('#results').css('display','block');
-			}
-		</script>
+		<script type='text/javascript' src='js/student_portal.js'></script>
 	</head>
 	<body>
 		<div id='wrapper'>
@@ -74,7 +57,8 @@
 									echo "<td>".$subject."</td>";
 									echo "<td>".$start->format('d M Y')."</td>";
 									echo "<td>".$start->format('H:m')."</td>";
-									echo "<td>".$duration->days." Days,".$duration->h." hours</td>";
+									//echo "<td>".$duration->days." Days,".$duration->h." hours</td>";
+									echo "<td>".getTimeString($row['test_duration'])."</td>";
 									echo "<td>".$row['test_type']."</td>";
 									echo "</tr>";
 								}

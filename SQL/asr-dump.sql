@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 24, 2015 at 08:04 AM
+-- Generation Time: Dec 24, 2015 at 06:18 PM
 -- Server version: 5.6.27-0ubuntu1
 -- PHP Version: 5.6.11-1ubuntu3.1
 
@@ -200,19 +200,62 @@ CREATE TABLE IF NOT EXISTS `tests` (
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `test_name` varchar(255) NOT NULL,
-  `test_type` enum('CODE','MCQ') DEFAULT NULL
+  `test_type` enum('CODE','MCQ') DEFAULT NULL,
+  `test_duration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tests`
 --
 
-INSERT INTO `tests` (`faculty_id`, `test_id`, `group_id`, `start_time`, `end_time`, `test_name`, `test_type`) VALUES
-(500001, 21899, NULL, NULL, NULL, 'MCA 01', 'CODE'),
-(500001, 41230, 1, '2015-12-23 10:10:00', '2015-12-23 13:25:00', 'MSSE 02', 'CODE'),
-(500002, 60160, NULL, NULL, NULL, 'msse', 'CODE'),
-(500001, 62572, 2, '2015-12-25 10:30:00', '2015-12-26 10:30:00', 'MSSE 01', 'CODE'),
-(500001, 80099, NULL, NULL, NULL, 'SQL', 'CODE');
+INSERT INTO `tests` (`faculty_id`, `test_id`, `group_id`, `start_time`, `end_time`, `test_name`, `test_type`, `test_duration`) VALUES
+(500001, 11427, 1, '2015-12-25 06:30:00', '2015-12-27 10:45:00', 'MSSE 02', 'CODE', 90),
+(500001, 21899, NULL, NULL, NULL, 'MCA 01', 'CODE', 120),
+(500001, 41230, 1, '2015-12-23 10:10:00', '2015-12-23 13:25:00', 'MSSE 02', 'CODE', 120),
+(500002, 60160, 3, '2015-12-26 13:45:00', '2015-12-30 08:30:00', 'msse', 'CODE', 120),
+(500001, 62572, 2, '2015-12-25 10:30:00', '2015-12-26 10:30:00', 'MSSE 01', 'CODE', 120),
+(500001, 80099, NULL, NULL, NULL, 'SQL', 'CODE', 120);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_8827`
+--
+-- in use(#1146 - Table 'ASR.test_code_8827' doesn't exist)
+-- Error reading data: (#1146 - Table 'ASR.test_code_8827' doesn't exist)
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_11427`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_11427` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_11427`
+--
+
+INSERT INTO `test_code_11427` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('sjfvnljdfnvnl', 'knln', 'klnkl', 'lknlkn', 'klnkln', 'nlknn', 'klnl', 1),
+('l;rfer\r\nerf43r\r\n3\r\n43\r\n\r\n43', ' v,dflkvwe\r\nfwlf\r\nl', 'ljrenw\r\ne''r;ver', 'lvnenr\r\nlnbv;er', 'llrenfer\r\nfe;lvg', 'lenver\r\nvelrler\r\nelbvljerv\r\nl\r\nwrfr', 'r', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_17378`
+--
+-- in use(#1146 - Table 'ASR.test_code_17378' doesn't exist)
+-- Error reading data: (#1146 - Table 'ASR.test_code_17378' doesn't exist)
 
 -- --------------------------------------------------------
 
@@ -289,6 +332,14 @@ CREATE TABLE IF NOT EXISTS `test_code_60160` (
 INSERT INTO `test_code_60160` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
 ('jkhkbhbhb', 'hjbhjbhj\r\niljnkl\r\nlhbgk', 'mn n mn', 'hgvhgvghvghj\r\njkbbjk\r\njnjlkn', 'bkjb\r\nljkb', 'h\r\nkl\r\nklnlkmkl\r\n', 'hvjhbh\r\nkjbj', 1),
 ('jkbhbhkbkh\r\n;lkljl\r\nljhk', 'jnl/,/hbk', 'jkbn/,kjbjg', 'jnkml/,lnbkhvj', 'knmnjkbjvhv', 'knknjbhjg', 'jnlmk\r\nlkkbhhjgfg', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_60549`
+--
+-- in use(#1146 - Table 'ASR.test_code_60549' doesn't exist)
+-- Error reading data: (#1146 - Table 'ASR.test_code_60549' doesn't exist)
 
 -- --------------------------------------------------------
 
@@ -394,6 +445,12 @@ ALTER TABLE `tests`
   ADD PRIMARY KEY (`test_id`);
 
 --
+-- Indexes for table `test_code_11427`
+--
+ALTER TABLE `test_code_11427`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `test_code_21899`
 --
 ALTER TABLE `test_code_21899`
@@ -443,6 +500,11 @@ ALTER TABLE `groups`
 --
 ALTER TABLE `student_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `test_code_11427`
+--
+ALTER TABLE `test_code_11427`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `test_code_21899`
 --

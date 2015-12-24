@@ -125,4 +125,25 @@
 			return null;
 		}
 	}
+	function getTimeString($time_in_mins) // returns a string of the format n hours, x minutes when given the number of minutes.
+	{
+		if($time_in_mins > 0)
+		{
+			$time_string = "";
+			$hours = (int)($time_in_mins/60);
+			if($hours != 0)
+			{
+				if($hours == 1)
+					$time_string = $hours." hour";
+				else
+					$time_string = $hours." hours";
+			}
+			$mins = $time_in_mins-(60*$hours);
+			if($mins != 0)
+				$time_string .= " ".$mins." mins";
+			return $time_string;
+		}
+		else
+			return "0 mins";
+	}
 ?>
