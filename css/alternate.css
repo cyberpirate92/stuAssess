@@ -1,0 +1,119 @@
+body
+{
+	border:none;
+	background: #005e75;
+	background:#ffffff;
+	background-image: url('../images/45-degree-fabric-dark.png');
+	font-family:Helvetica;
+}
+#wrapper
+{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+}
+#header
+{
+	background:rgba(0,0,0,0.75);
+	width:100%;
+	height:10%;
+	border:inherit;
+	padding:5px;
+}
+#logo
+{
+	padding:1px;
+	padding-left: 0px;
+	padding-top: 0px;
+	width:10%;
+	height:100%;
+	float:left;
+	border:inherit;
+}
+#navbar
+{
+	width:85%;
+	float:right;
+	border:inherit;
+}
+#navbar-options
+{
+	width:75%;
+	float:left;
+	border:inherit;
+}
+#logout-block
+{
+	width:20%;
+	float:right;
+	border:inherit;
+}
+#content
+{
+	margin-left:5%;
+	margin-top:3%;
+	padding:2%;
+	margin-right:5%;
+	background:rgba(255,255,255,0.85);
+	border-radius: 20px;
+}
+p
+{
+	text-indent:1%;
+}
+h2
+{
+	text-align: center;
+}
+input[type='text']
+{
+
+}
+#loginBlock
+{
+	border-radius: 25px;
+	background:rgba(0,0,0,0.75);
+	width:30%;
+	padding:5px;
+	transition: all 0.5s ease-in;
+}
+#loginBlock:hover
+{
+	background:rgba(0,0,0,0.8);
+}
+.whiteText
+{
+	color:white;
+}
+#loginBlock input[type='text'],#loginBlock input[type='password']
+{
+	font-size:1.2em;
+	text-align: center;
+	height:35px;
+	width:250px;
+	border:none;
+	border-bottom:1px solid gray;
+}
+#loginblock input[type='text']
+{
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+#loginBlock input[type='submit']
+{
+	font-size:1.2em;
+	width:250px;
+	height:35px;
+	background:#556B2F;
+	border:none;
+	color:inherit;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	transition:all .5s ease-in;
+}
+#loginBlock input[type='submit']:hover
+{
+	background:#568203;
+}
