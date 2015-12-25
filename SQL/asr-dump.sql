@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 24, 2015 at 08:19 PM
+-- Generation Time: Dec 25, 2015 at 09:58 AM
 -- Server version: 5.6.27-0ubuntu1
 -- PHP Version: 5.6.11-1ubuntu3.1
 
@@ -210,7 +210,10 @@ CREATE TABLE IF NOT EXISTS `tests` (
 
 INSERT INTO `tests` (`faculty_id`, `test_id`, `group_id`, `start_time`, `end_time`, `test_name`, `test_type`, `test_duration`) VALUES
 (500001, 16600, 1, '2015-12-25 10:30:00', '2015-12-26 10:40:00', 'MSSE', 'CODE', 75),
-(500001, 62253, NULL, NULL, NULL, 'B Tech', 'CODE', 55);
+(500001, 46999, NULL, NULL, NULL, 'validation', 'CODE', 70),
+(500001, 50497, NULL, NULL, NULL, 'Sample', 'CODE', 235),
+(500001, 62253, NULL, NULL, NULL, 'B Tech', 'CODE', 55),
+(500001, 65774, NULL, NULL, NULL, 'SPOJ', 'CODE', 30);
 
 -- --------------------------------------------------------
 
@@ -240,6 +243,56 @@ INSERT INTO `test_code_16600` (`question`, `input1`, `input2`, `input3`, `output
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test_code_46999`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_46999` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_46999`
+--
+
+INSERT INTO `test_code_46999` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('kmf', 'jnlg', 'jgn', 'klvf', 'ljm ', 'jkg', 'kldf', 1),
+('klfmvklkdv\r\ndsvksdv\r\ndsbklsb', ' tm', 'mvre egre', 'eltgke34qr', ' kltrg', 'erer', '34r', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_50497`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_50497` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_50497`
+--
+
+INSERT INTO `test_code_50497` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('Add numbers, output result', '2\r\n3', '5\r\n6', '3\r\n5', '5', '11', '8', 1),
+('Print factorial', '3', '4', '5', '6', '24', '120', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `test_code_62253`
 --
 
@@ -262,6 +315,31 @@ INSERT INTO `test_code_62253` (`question`, `input1`, `input2`, `input3`, `output
 ('I\r\nilvv\r\nsvsv\r\nvf', 'lnifvrv\r\nervergver', 'jrnvjler\r\nervjkenrjl', 'jlrelngvle\r\nerjglerg', 'lfnvker\r\nververn', 'vlenve\r\nrgejr', 'eglenlkrg\r\nwrgwwegw', 1),
 ('dfnks;m\r\nsadfas\r\nfsadf', '8943\r\nfawfa', 'er\r\ngvsd\r\ns', 'slfknk\r\nargelrg', 'r\r\ngsdv\r\n', 'f\r\ngvsdvs', 'ERGER\r\nER', 2),
 ('LNKLNSKFVS\r\nDLNDSF', 'LKNRLGVD\r\nSLNDF', 'LNDGLKS\r\nSDGKSDLKF', 'LNDFGLSNDLG\r\nSGKSDBGSD', 'LNLDB\r\nDSFKB', 'LDNGBLSD\r\nSDKGBS', 'LFNFLNKSDF\r\nGSDKGNSD', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test_code_65774`
+--
+
+CREATE TABLE IF NOT EXISTS `test_code_65774` (
+  `question` text NOT NULL,
+  `input1` text NOT NULL,
+  `input2` text NOT NULL,
+  `input3` text NOT NULL,
+  `output1` text NOT NULL,
+  `output2` text NOT NULL,
+  `output3` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test_code_65774`
+--
+
+INSERT INTO `test_code_65774` (`question`, `input1`, `input2`, `input3`, `output1`, `output2`, `output3`, `id`) VALUES
+('Your program is to use the brute-force approach in order to find the Answer to Life, the Universe, and Everything. More precisely... rewrite small numbers from input to output. Stop processing input after reading in the number 42. All numbers at input are integers of one or two digits.\r\n', '1\r\n2\r\n88\r\n42\r\n99', '23\r\n34\r\n45\r\n33\r\n42\r\n43\r\n23', '23\r\n42\r\n34', '1\r\n2\r\n88', '23\r\n34\r\n45\r\n33', '23', 1),
+('The Antique Comedians of Malidinesia prefer comedies to tragedies. Unfortunately, most of the ancient plays are tragedies. Therefore the dramatic advisor of ACM has decided to transfigure some tragedies into comedies. Obviously, this work is very hard because the basic sense of the play must be kept intact, although all the things change to their opposites. For example the numbers: if any number appears in the tragedy, it must be converted to its reversed form before being accepted into the comedy play.\r\n\r\nReversed number is a number written in arabic numerals but the order of digits is reversed. The first digit becomes last and vice versa. For example, if the main hero had 1245 strawberries in the tragedy, he has 5421 of them now. Note that all the leading zeros are omitted. That means if the number ends with a zero, the zero is lost by reversing (e.g. 1200 gives 21). Also note that the reversed number never has any trailing zeros.\r\n\r\nACM needs to calculate with reversed numbers. Your task is to add two reversed numbers and output their reversed sum. Of course, the result is not unique because any particular number is a reversed form of several numbers (e.g. 21 could be 12, 120 or 1200 before reversing). Thus we must assume that no zeros were lost by reversing (e.g. assume that the original number was 12).\r\n\r\nInput\r\n\r\nThe input consists of N cases (equal to about 10000). The first line of the input contains only positive integer N. Then follow the cases. Each case consists of exactly one line with two positive integers separated by space. These are the reversed numbers you are to add.\r\n\r\nOutput\r\n\r\nFor each case, print exactly one line containing only one integer - the reversed sum of two reversed numbers. Omit any leading zeros in the output.', '3\r\n24 1\r\n4358 754\r\n305 794', '2\r\n10 20\r\n45 32', '3\r\n2 50\r\n11 91\r\n32 15', '34\r\n1998\r\n1', '3\r\n77', '25\r\n201\r\n74', 2);
 
 -- --------------------------------------------------------
 
@@ -323,9 +401,27 @@ ALTER TABLE `test_code_16600`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `test_code_46999`
+--
+ALTER TABLE `test_code_46999`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_code_50497`
+--
+ALTER TABLE `test_code_50497`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `test_code_62253`
 --
 ALTER TABLE `test_code_62253`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test_code_65774`
+--
+ALTER TABLE `test_code_65774`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -354,10 +450,25 @@ ALTER TABLE `student_group`
 ALTER TABLE `test_code_16600`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `test_code_46999`
+--
+ALTER TABLE `test_code_46999`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `test_code_50497`
+--
+ALTER TABLE `test_code_50497`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `test_code_62253`
 --
 ALTER TABLE `test_code_62253`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `test_code_65774`
+--
+ALTER TABLE `test_code_65774`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `test_result`
 --

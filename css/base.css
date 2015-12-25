@@ -172,3 +172,7 @@ a.linkButton
 	font-size: 10px;
 	border:none;
 }
+td.white_bg
+{
+	background:white;
+}

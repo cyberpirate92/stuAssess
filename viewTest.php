@@ -39,7 +39,7 @@
 							$r = mysqli_query($db,$query);
 							if(mysqli_num_rows($r) > 0)
 							{
-								$table_html = "<table class='standardTable left20 top5' width='75%' cellspacing='0px'>";
+								$table_html = "<table class='standardTable left20 top5' width='90%' cellspacing='0px'>";
 								$table_html.= "<tr>";
 								$table_html.= "<th>S.No</th>";
 								$table_html.= "<th>Question </th>";
@@ -61,11 +61,11 @@
 									$table_html.= "<tr>";
 									$table_html.= "<td>".$table_row['id']."</td>";
 									$table_html.= "<td>".$table_row['question']."</td>";
-									$table_html.= "<td>".$table_row['input1']."</td>";
+									$table_html.= "<td class='white_bg'>".$table_row['input1']."</td>";
 									$table_html.= "<td>".$table_row['output1']."</td>";
-									$table_html.= "<td>".$table_row['input2']."</td>";
+									$table_html.= "<td class='white_bg'>".$table_row['input2']."</td>";
 									$table_html.= "<td>".$table_row['output2']."</td>";
-									$table_html.= "<td>".$table_row['input3']."</td>";
+									$table_html.= "<td class='white_bg'>".$table_row['input3']."</td>";
 									$table_html.= "<td>".$table_row['output3']."</td>";
 									$table_html.= "</tr>";
 								}

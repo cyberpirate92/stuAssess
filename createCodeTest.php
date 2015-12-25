@@ -123,7 +123,6 @@
 	}
 	else
 	{
-		//echo "<script>console.log('else condition');</script>";
 		redirectTo('faculty_portal.php');
 	}
 ?>
@@ -132,6 +131,55 @@
 		<title> Student Assesment </title>
 		<link rel='stylesheet' href='css/base.css'>
 		<script src='js/jquery-2.1.4.min.js' type='text/javascript'></script>
+		<script type='text/javascript'>
+			function validateQuestion()
+			{
+				var question = document.getElementById('question').value.trim();
+				var input1 = document.getElementById('input1').value.trim();
+				var output1 = document.getElementById('output1').value.trim();
+				var input2 = document.getElementById('input2').value.trim();
+				var output2 = document.getElementById('output2').value.trim();
+				var input3 = document.getElementById('input3').value.trim();
+				var output3 = document.getElementById('output3').value.trim();
+				var errors = "";
+
+				if(question == "")
+				{
+					errors += "<li> question cannot be empty </li>";
+				}
+				if(input1 == "")
+				{
+					errors += "<li> Testcase 1 input is empty </li>";
+				}
+				if(output1 == "")
+				{
+					errors += "<li> Testcase 1 output is empty </li>";
+				}
+				if(input2 == "")
+				{
+					errors += "<li> Testcase 2 input is empty </li>";
+				}
+				if(output2 == "")
+				{
+					errors += "<li> Testcase 2 output is empty </li>";
+				}
+				if(input3 == "")
+				{
+					errors += "<li> Testcase 3 input is empty </li>";
+				}
+				if(output3 == "")
+				{
+					errors += "<li> Testcase 3 output is empty </li>";
+				}
+				if(errors != "")
+				{
+					errors = "<ul>"+errors+"</ul>";
+					document.getElementById("errors").innerHTML = errors;
+					return false;
+				}
+				return true;
+			}
+		</script>
 	</head>
 	<body>
 		<div id='wrapper'>
@@ -140,36 +188,40 @@
 				<div id='content-main'>
 					<h2> Question Number : <?php echo ($currentQuestion+1); ?> </h2>
 					<a class='linkButton' href='discardTest.php'>Discard Test</a>
-					<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST'>
+					<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST' onsubmit='return validateQuestion();'>
 						<h2> Question: </h2>
-						<textarea name='question' rows='10' cols='60'><?php /*TODO: if already entered, fill this*/ ?></textarea>
+						<textarea name='question' rows='10' cols='60' id='question'><?php /*TODO: if already entered, fill this*/ ?></textarea>
 						
 						<div class='testcase-block'>
 							<h2> Testcase 1: </h2>
 							<h3> Input: </h3>
-							<textarea name='input1' rows='10' cols='25'><?php /*TODO: if already entered, fill this */?></textarea>
+							<textarea name='input1' rows='10' cols='25' id='input1'><?php /*TODO: if already entered, fill this */?></textarea>
 							Output:
-							<textarea name='output1' rows='10' cols='25'><?php /*TODO: if already entered, fill this */?></textarea>
+							<textarea name='output1' rows='10' cols='25' id='output1'><?php /*TODO: if already entered, fill this */?></textarea>
 						</div>
 
 						<div class='testcase-block'>
 							<h2> Testcase 2: </h2>
 							<h3> Input: </h3>
-							<textarea name='input2' rows='10' cols='25'><?php //TODO: if already entered, fill this ?></textarea>
+							<textarea name='input2' rows='10' cols='25' id='input2'><?php //TODO: if already entered, fill this ?></textarea>
 							Output:
-							<textarea name='output2' rows='10' cols='25'><?php //TODO: if already entered, fill this ?></textarea>
+							<textarea name='output2' rows='10' cols='25' id='output2'><?php //TODO: if already entered, fill this ?></textarea>
 						</div>
 
 						<div class='testcase-block'>
 							<h2> Testcase 3: </h2>
 							<h3> Input: </h3>
-							<textarea name='input3' rows='10' cols='25'><?php //TODO: if already entered, fill this ?></textarea>
+							<textarea name='input3' rows='10' cols='25' id='input3'><?php //TODO: if already entered, fill this ?></textarea>
 							Output:
-							<textarea name='output3' rows='10' cols='25'><?php //TODO: if already entered, fill this ?></textarea>
+							<textarea name='output3' rows='10' cols='25' id='output3'><?php //TODO: if already entered, fill this ?></textarea>
 						</div>
 
 						<input type='submit' value='Save &amp; Continue'>
 					</form>
+					<br>
+					<div id='errors'>
+						<!-- Javascript appends errors here -->
+					</div>
 				</div>
 			</div>
 			<div id='footer'>
