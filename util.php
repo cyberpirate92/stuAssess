@@ -191,4 +191,22 @@
 		}
 		return $table_name;
 	}
+	function displayError($errorMsg) // A handy function to display errors in HTML
+	{
+		echo "<center>";
+		echo "<div class='error-display'>";
+		echo "<img src='../images/error.png' width='50' height='50'></img>";
+		echo "<p><strong>ERROR:</strong> $errorMsg</p>";
+		echo "</div>";
+		echo "</center>";
+	}
+	function displayError1($errorMsg) // Same as the displayError function, except that the image path has changed.
+	{
+		echo "<center>";
+		echo "<div class='error-display'>";
+		echo "<img src='images/error.png' width='50' height='50'></img>";
+		echo "<p><strong>ERROR:</strong> $errorMsg</p>";
+		echo "</div>";
+		echo "</center>";
+	}
 ?>

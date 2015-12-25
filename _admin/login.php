@@ -1,6 +1,37 @@
+<?php
+	if(!empty($_POST))
+	{
+		if(isset($_POST['username']) && isset($_POST['password']))
+		{
+			require_once("../db.php");
+			$errors = null;
+			$username = mysqli_real_escape_string($db,$_POST['username']);
+			$password = md5(mysqli_real_escape_string($db,$_POST['password']));
+			$query = "SELECT * FROM admin_login WHERE username='$username' AND password='$password'";
+			$result = mysqli_query($db,$query);
+			if(mysqli_num_rows($result) > 0)
+			{
+				require_once('../util.php');
+				if(session_status() == PHP_SESSION_ACTIVE) // invalidate previous session (if any)
+				{
+					session_unset();
+				}
+				session_start();
+				$_SESSION['username'] = $username;
+				mysqli_close($db);
+				redirectTo('manage.php');
+			}
+			else
+			{
+				$errors = "Invalid Login";
+			}
+			mysqli_close($db);
+		}
+	}
+?>
 <html>
 	<head>
-		<title> Template </title>
+		<title> Admin Login </title>
 		<link href='../css/alternate.css' rel='stylesheet'>
 		<style type='text/css'>
 			div#content
@@ -28,6 +59,13 @@
 				</div>
 				</center>
 			</div>
+			<?php
+				if(!empty($errors))
+				{
+					require_once('../util.php');
+					displayError($errors);
+				}
+			?>
 		</div>
 	</body>
 </html>

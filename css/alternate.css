@@ -117,3 +117,26 @@ input[type='text']
 {
 	background:#568203;
 }
+div.error-display
+{
+	border-radius:25px;
+	padding:0px;
+	display:inline-block;
+	width:25%;
+	letter-spacing:.5;
+	font-size:0.95em;
+	font-family:helvetica;
+	background:rgba(241,93,67,0.5);
+	color:#65000F;
+	text-transform: lowercase;
+	transition:all 2s ease-in;
+}
+.error-display img
+{
+	float:left;
+}
+.error-display p
+{
+	text-align:left;
+	text-indent:2%;
+}
