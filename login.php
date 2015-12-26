@@ -43,7 +43,7 @@
 ?>
 <html>
 	<head>
-		<title> Template </title>
+		<title> Login </title>
 		<link href='css/alternate.css' rel='stylesheet'>
 		<style type='text/css'>
 			div#content

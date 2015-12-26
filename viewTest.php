@@ -24,6 +24,7 @@
 					}
 					else
 					{
+						require_once("util.php");
 						$prefix = ($testType == "CODE") ? "test_code_" : "test_mcq_";
 						$table_name = $prefix.$testID;
 
@@ -60,13 +61,13 @@
 								{
 									$table_html.= "<tr>";
 									$table_html.= "<td>".$table_row['id']."</td>";
-									$table_html.= "<td>".$table_row['question']."</td>";
-									$table_html.= "<td class='white_bg'>".$table_row['input1']."</td>";
-									$table_html.= "<td>".$table_row['output1']."</td>";
-									$table_html.= "<td class='white_bg'>".$table_row['input2']."</td>";
-									$table_html.= "<td>".$table_row['output2']."</td>";
-									$table_html.= "<td class='white_bg'>".$table_row['input3']."</td>";
-									$table_html.= "<td>".$table_row['output3']."</td>";
+									$table_html.= "<td>".getEscapedHTML($table_row['question'])."</td>";
+									$table_html.= "<td class='white_bg'>".getEscapedHTML($table_row['input1'])."</td>";
+									$table_html.= "<td>".getEscapedHTML($table_row['output1'])."</td>";
+									$table_html.= "<td class='white_bg'>".getEscapedHTML($table_row['input2'])."</td>";
+									$table_html.= "<td>".getEscapedHTML($table_row['output2'])."</td>";
+									$table_html.= "<td class='white_bg'>".getEscapedHTML($table_row['input3'])."</td>";
+									$table_html.= "<td>".getEscapedHTML($table_row['output3'])."</td>";
 									$table_html.= "</tr>";
 								}
 								$table_html.= "</table><br>";
@@ -122,7 +123,7 @@
 				<div id='content-main'>
 					<?php
 						if(!empty($table_html))
-							echo nl2br($table_html);
+							echo $table_html;
 					?>
 					<br><br>
 					<a class='linkButton' href='faculty_portal.php'> Go Back </a>

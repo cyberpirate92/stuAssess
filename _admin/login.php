@@ -18,6 +18,7 @@
 				}
 				session_start();
 				$_SESSION['username'] = $username;
+				$_SESSION['access_level'] = "admin";
 				mysqli_close($db);
 				redirectTo('manage.php');
 			}

@@ -12,10 +12,16 @@
 				<div id='navbar'>
 					&nbsp;
 					<div id='navbar-options'>
-
+						<ul>
+							<li>Home</li>
+							<li>About</li>
+							<li>Tests</li>
+							<li>Faculty</li>
+							<li>Students</li>
+						</ul>
 					</div>
 					<div id='logout-block'>
-						&nbsp;
+						<a href='logout.php' class='header-link'>Logout</a>
 					</div>
 				</div>
 			</div>

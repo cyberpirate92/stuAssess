@@ -209,4 +209,11 @@
 		echo "</div>";
 		echo "</center>";
 	}
+	function getEscapedHTML($htmlCode) // To prevent XSS 
+	{
+		$htmlCode = str_replace("&","&amp;",$htmlCode);
+		$htmlCode = str_replace("<","&lt;",$htmlCode);
+		$htmlCode = str_replace(">","&gt;",$htmlCode);
+		return "<pre><code>".$htmlCode."</code></pre>";
+	}
 ?>
