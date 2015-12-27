@@ -3,30 +3,15 @@
 	{
 		if(isset($_POST['username']) && isset($_POST['password']))
 		{
-			require_once("../db.php");
-			$errors = null;
-			$username = mysqli_real_escape_string($db,$_POST['username']);
-			$password = md5(mysqli_real_escape_string($db,$_POST['password']));
-			$query = "SELECT * FROM admin_login WHERE username='$username' AND password='$password'";
-			$result = mysqli_query($db,$query);
-			if(mysqli_num_rows($result) > 0)
+			require_once('../util.php');
+			if(isValidLogin("admin",$_POST['username'],$_POST['password']))
 			{
-				require_once('../util.php');
-				if(session_status() == PHP_SESSION_ACTIVE) // invalidate previous session (if any)
-				{
-					session_unset();
-				}
-				session_start();
-				$_SESSION['username'] = $username;
+				secure_session_destroy();
+				secure_session_start();
+				$_SESSION['username'] = trim($_POST['username']);
 				$_SESSION['access_level'] = "admin";
-				mysqli_close($db);
 				redirectTo('manage.php');
 			}
-			else
-			{
-				$errors = "Invalid Login";
-			}
-			mysqli_close($db);
 		}
 	}
 ?>

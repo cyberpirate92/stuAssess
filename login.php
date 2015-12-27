@@ -1,43 +1,26 @@
 <?php
-	include('util.php');
 	if(!empty($_POST))
 	{
-		require_once('db.php');
 		require_once('util.php');
-		$username = mysqli_real_escape_string($db,strtoupper(trim($_POST['username'])));
-		$password = mysqli_real_escape_string($db,$_POST['password']);
-
-		if(strlen($username) == 0 || strlen($password) == 0)
+		$username = strtoupper($_POST['username']);
+		$password = $_POST['password'];
+		$loginType = isFacultyOrStudent($username);
+		if(isValidLogin($loginType,$username,$password))
 		{
-			displayError1('Invalid Username/Password');
+			secure_session_destroy();
+			secure_session_start();
+			$_SESSION['username'] = $username;
+			$_SESSION['type'] = $loginType;
+			$redirectPage = "";
+			if($loginType == "faculty")
+				$redirectPage = "faculty_portal.php";
+			else
+				$redirectPage = "student_portal.php";
+			redirectTo($redirectPage);
 		}
 		else
 		{
-			$password = md5($password);
-			if(preg_match('/^[0-9]*$/',$username)) // checking if username belongs to a faculty (all numbers)
-			{
-				$table_name = "faculty_login";
-				$page_name = "faculty_portal.php";
-				$type = 'faculty';
-			}
-			else
-			{
-				$table_name = "student_login";
-				$page_name = "student_portal.php";
-				$type='student';
-			}
-			$result = mysqli_query($db,"SELECT * FROM $table_name WHERE username='$username' AND password='$password'");
-			if(mysqli_num_rows($result) > 0)
-			{
-				session_start();
-				$_SESSION['username'] = $username;
-				$_SESSION['type'] = $type;
-				redirectTo($page_name);
-			}
-			else
-			{
-				displayError1('Invalid username/password.');
-			}
+			displayError1("Invalid Login");
 		}
 	}
 ?>

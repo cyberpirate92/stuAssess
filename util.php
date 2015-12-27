@@ -223,24 +223,35 @@
 	function secure_session_start() // Use this instead of session_start()
 	{
 		$sessionName = constant("SESSION_NAME");
-		$secure = SECURE;
-		$httpOnly = true;
-		if (ini_set('session.use_only_cookies', 1) === FALSE) 
+		if(session_status() != PHP_SESSION_ACTIVE)
 		{
-        	displayError("Cannot initiate session, please try again");
-        	exit();
-    	}
-		$cookieParams = session_get_cookie_params();
-		session_set_cookie_params($cookieParams["lifetime"],$cookieParams["path"],$cookieParams["domain"],$secure,$httpOnly);
-		session_name($sessionName);
-		session_start();
-		session_regenerate_id(true);
+			$secure = false;
+			$httpOnly = true;
+			if (ini_set('session.use_only_cookies', 1) === FALSE) 
+			{
+	        	displayError("Cannot initiate session, please try again");
+	        	exit();
+	    	}
+			$cookieParams = session_get_cookie_params();
+			session_set_cookie_params($cookieParams["lifetime"],$cookieParams["path"],$cookieParams["domain"],$secure,$httpOnly);
+			session_name($sessionName);
+			session_start();
+			session_regenerate_id(true);
+		}
+		else
+		{
+			session_name($sessionName);
+			session_start();
+		}
 	}
-	function secure_session_destory() // use this function instead of session_destroy()
+	function secure_session_destroy() // use this function instead of session_destroy()
 	{
-		$session_name = constant("SESSION_NAME");
-		session_name($session_name);
-		session_start();
+		if(session_status() == PHP_SESSION_NONE)
+		{
+			$session_name = constant("SESSION_NAME");
+			session_name($session_name);
+			session_start();
+		}
 		$_SESSION = array(); // completely removes all items in session
 		if(ini_get("session.use_cookies"))
 		{
@@ -262,9 +273,15 @@
 			$table_name = constant("STUDENT_TABLE");
 
 		require("db.php");
-		$username = mysqli_real_escape_string($db,$username);
-		$password = mysqli_real_escape_string($db,$password);
-		$query = "SELECT * FROM $table_name WHERE $username='$username' AND $password='$password'";
+		$username = mysqli_real_escape_string($db,trim($username));
+		$password = md5(mysqli_real_escape_string($db,$password));
+		if(empty($username) || empty($password))
+		{
+			mysqli_close($db);
+			return false;
+		}
+		$query = "SELECT * FROM $table_name WHERE username='$username' AND password='$password'";
+		//debugMsg($query);
 		$result = mysqli_query($db,$query);
 		if(mysqli_num_rows($result) > 0)
 			$isLoginSuccess = true;
@@ -282,7 +299,7 @@
 		if(isset($_SESSION['username']))
 			return true;
 	}
-	function getLoginType() 
+	/*function getLoginType() 
 	{
 		if(isLoggedIn())
 		{
@@ -296,5 +313,29 @@
 			}
 		}
 		return null;
+	}*/
+	function adminLoginCheck()
+	{
+		secure_session_start();
+		if(isset($_SESSION['username']) && isset($_SESSION['access_level']) && $_SESSION['access_level'] == "admin")
+			return $_SESSION['username'];
+		else
+		{
+			return false;
+		}
+	}
+	function isFacultyOrStudent($username)
+	{
+		if(preg_match('/^[0-9]*$/',$username)) // checking if username belongs to a faculty (all numbers)
+			return "faculty";
+		else
+			return "student";
+	}
+	/* Function for displaying debug messages in js console */
+	function debugMsg($msg)
+	{
+		echo "<script>";
+		echo "console.log('".addslashes($msg)."');";
+		echo "</script>";
 	}
 ?>
