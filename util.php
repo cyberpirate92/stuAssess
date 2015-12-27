@@ -2,6 +2,10 @@
 	// constants 
 	define("TEST_ID_RANGE_START",0);
 	define("TEST_ID_RANGE_END",100000);
+	define("STUDENT_TABLE","student_login");
+	define("FACULTY_TABLE","faculty_login");
+	define("ADMIN_TABLE","admin_login");
+	define("SESSION_NAME","ABRT_SA_42");  // some random text
 
 	class CodeQuestion
 	{
@@ -215,5 +219,82 @@
 		$htmlCode = str_replace("<","&lt;",$htmlCode);
 		$htmlCode = str_replace(">","&gt;",$htmlCode);
 		return "<pre><code>".$htmlCode."</code></pre>";
+	}
+	function secure_session_start() // Use this instead of session_start()
+	{
+		$sessionName = constant("SESSION_NAME");
+		$secure = SECURE;
+		$httpOnly = true;
+		if (ini_set('session.use_only_cookies', 1) === FALSE) 
+		{
+        	displayError("Cannot initiate session, please try again");
+        	exit();
+    	}
+		$cookieParams = session_get_cookie_params();
+		session_set_cookie_params($cookieParams["lifetime"],$cookieParams["path"],$cookieParams["domain"],$secure,$httpOnly);
+		session_name($sessionName);
+		session_start();
+		session_regenerate_id(true);
+	}
+	function secure_session_destory() // use this function instead of session_destroy()
+	{
+		$session_name = constant("SESSION_NAME");
+		session_name($session_name);
+		session_start();
+		$_SESSION = array(); // completely removes all items in session
+		if(ini_get("session.use_cookies"))
+		{
+			$params = session_get_cookie_params();
+			setcookie(session_name(),'',time()-42000,$params["path"],$params["domain"],$params["secure"],$params["httponly"]);
+		}
+		session_destroy();
+	}
+	function isValidLogin($login_type,$username,$password) // use this login function instead of writing login code everywhere
+	{
+		$table_name = "";
+		$isLoginSuccess = false;
+		
+		if($login_type=="admin")
+			$table_name = constant("ADMIN_TABLE");
+		else if($login_type=="faculty")
+			$table_name = constant("FACULTY_TABLE");
+		else
+			$table_name = constant("STUDENT_TABLE");
+
+		require("db.php");
+		$username = mysqli_real_escape_string($db,$username);
+		$password = mysqli_real_escape_string($db,$password);
+		$query = "SELECT * FROM $table_name WHERE $username='$username' AND $password='$password'";
+		$result = mysqli_query($db,$query);
+		if(mysqli_num_rows($result) > 0)
+			$isLoginSuccess = true;
+		mysqli_close($db);
+		return $isLoginSuccess;
+	}
+	function isLoggedIn() // JUST for checking if a login session exists, DOES NOT DISTINGUISH between faculty, student ot admin logins
+	{
+		$session_name = constant("SESSION_NAME");
+		if(session_status() == PHP_SESSION_NONE)
+		{
+			session_name(constant("SESSION_NAME"));
+			session_start();
+		}		
+		if(isset($_SESSION['username']))
+			return true;
+	}
+	function getLoginType() 
+	{
+		if(isLoggedIn())
+		{
+			if(isset($_SESSION['type']))
+			{
+				return $_SESSION['type'];
+			}
+			else if(isset($_SESSION['access_level']))
+			{
+				return $_SESSION['access_level'];
+			}
+		}
+		return null;
 	}
 ?>
