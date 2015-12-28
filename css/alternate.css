@@ -40,8 +40,8 @@ body
 }
 #navbar-options
 {
-	width:75%;
-	float:left;
+	width:70%;
+	float:right;
 	border:inherit;
 	padding-left:5%;
 	padding-top:2.5%;
@@ -54,11 +54,11 @@ body
 }
 #navbar-options li
 {
-	border-radius:20px;
-	font-weight:bold;
+	font-family: monospace;
+	border-radius:10px;
 	min-width:100px;
 	float: left;
-    padding: 0.5%;
+    padding: 1%;
     font-size:1.2em;
     color: #FFF;
     text-align: center;
@@ -66,13 +66,7 @@ body
 }
 #navbar-options li:hover
 {
-	background:rgba(127,127,127,0.75);
-}
-#logout-block
-{
-	width:20%;
-	float:right;
-	border:inherit;
+	text-decoration: underline;
 }
 #content
 {
@@ -176,10 +170,12 @@ div.error-display
 	text-align:left;
 	text-indent:2%;
 }
-a.header-link
+#navbar-options a
 {
-	text-decoration:none;
-	font-family: inherit;
-	font-weight:bolder;
+	text-decoration: none;
 	color:white;
+}
+#navbar-options a:active
+{
+	color:yellow;
 }

@@ -4,6 +4,7 @@
 	if($username)
 	{
 		echo "admin logged in";
+		echo "<a href='../logout.php'> Logout </a>";
 	}
 	else
 	{

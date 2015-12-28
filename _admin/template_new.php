@@ -13,15 +13,13 @@
 					&nbsp;
 					<div id='navbar-options'>
 						<ul>
-							<li>Home</li>
-							<li>About</li>
-							<li>Tests</li>
-							<li>Faculty</li>
-							<li>Students</li>
+							<li><a href='template_new.php'>Home</a></li>
+							<li><a href='#'>About</a></li>
+							<li><a href='#'>Tests</a></li>
+							<li><a href='#'>Faculty</a></li>
+							<li><a href='#'>Students</a></li>
+							<li><a href='logout.php'>Logout</a></li>
 						</ul>
-					</div>
-					<div id='logout-block'>
-						<a href='logout.php' class='header-link'>Logout</a>
 					</div>
 				</div>
 			</div>
